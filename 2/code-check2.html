@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>کد کارت تولد</title>
+<style>
+:root{--bg1:#2a1050;--bg2:#6a1b6f;--ink:#fff7ec;--gold:#ffc94d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg1:#1c0a38;--bg2:#4d1452}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{font-family:Vazirmatn,Tahoma,"Segoe UI",sans-serif;background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--ink);overflow:hidden}
+#stars{position:fixed;inset:0;pointer-events:none}
+.star{position:absolute;border-radius:50%;background:#fff;animation:tw 2s infinite alternate}
+@keyframes tw{from{opacity:.15}to{opacity:1}}
+main{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+h1{font-size:1.9rem;margin:0 0 26px;line-height:1.6;background:linear-gradient(90deg,#ffe08a,#ff9ccf,#9ee7ff,#ffe08a);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite;filter:drop-shadow(0 0 14px rgba(255,200,120,.5))}
+@keyframes shine{to{background-position:300% 0}}
+#code{width:min(260px,80vw);font:inherit;font-size:2.4rem;letter-spacing:.35em;text-indent:.35em;text-align:center;direction:ltr;color:var(--ink);background:rgba(255,255,255,.1);border:2px solid rgba(255,201,77,.6);border-radius:16px;padding:12px 8px;outline:none;box-shadow:0 0 24px rgba(255,201,77,.25)}
+#code:focus{border-color:var(--gold);box-shadow:0 0 30px rgba(255,201,77,.55)}
+#code.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+button{font:inherit;font-size:1.25rem;font-weight:700;margin-top:22px;background:var(--gold);color:#3a1450;border:0;border-radius:999px;padding:12px 44px;cursor:pointer;box-shadow:0 6px 0 #c9942a,0 0 26px rgba(255,201,77,.5)}
+button:active{transform:translateY(4px);box-shadow:0 2px 0 #c9942a}
+#msg{min-height:3.4em;margin-top:24px;font-size:1.4rem;font-weight:700;line-height:1.7}
+#msg.bad{color:#ff9ab8}
+#msg.ok{color:#8affb0}
+.conf{position:fixed;top:-20px;width:10px;height:14px;animation:fall linear forwards;z-index:9;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media (prefers-reduced-motion:reduce){.star,h1{animation:none}}
+#m2{display:none}
+.frame{font-size:5rem;line-height:1;padding:22px 36px;margin:6px 0 8px;border-radius:24px;border:3px solid var(--gold);background:rgba(255,255,255,.1);box-shadow:0 0 30px rgba(255,201,77,.45)}
+#m2 h1{font-size:1.5rem}
+.moon{position:fixed;top:7%;right:8%;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fffbe0,#ffe08a);box-shadow:0 0 40px 12px rgba(255,224,138,.45);animation:flt 6s ease-in-out infinite alternate;z-index:8;cursor:pointer;transition:translate 1.6s ease-in,opacity 1.4s}
+@keyframes flt{to{transform:translateY(12px)}}
+#day{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,#3d8fe0,#9bd6ff 70%,#d9f0ff);opacity:0;transition:opacity 1.6s}
+body.day #day{opacity:1}
+.star{transition:transform 1.8s ease-in}
+body.day .star{transform:translateX(var(--dx))}
+.moon::after{content:"";position:absolute;inset:-14px;border-radius:50%}
+body.day .moon{translate:0 -45vh;opacity:0;pointer-events:none}
+.sun{position:fixed;top:7%;right:8%;width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#fff6a8,#ffd23f 60%,#ffab1a);box-shadow:0 0 60px 22px rgba(255,200,40,.6);z-index:8;translate:0 -45vh;opacity:0;pointer-events:none;cursor:pointer;transition:translate 1.7s ease-out .5s,opacity 1.2s .5s}
+.sun::before{content:"";position:absolute;inset:-34px;border-radius:50%;background:repeating-conic-gradient(rgba(255,214,64,.6) 0 8deg,transparent 8deg 22.5deg);-webkit-mask-image:radial-gradient(circle,#000 55%,transparent 70%);mask-image:radial-gradient(circle,#000 55%,transparent 70%);animation:sunspin 14s linear infinite;z-index:-1}
+@keyframes sunspin{to{transform:rotate(360deg)}}
+body.day .sun{translate:0 0;opacity:1;pointer-events:auto}
+.cloud{position:fixed;z-index:1;width:130px;height:42px;background:#fff;border-radius:42px;pointer-events:none;opacity:0;translate:var(--from) 0;transition:translate 2.4s cubic-bezier(.2,.8,.3,1) .6s,opacity 1.2s .6s;animation:drift 9s ease-in-out infinite alternate}
+.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:62px;height:62px;top:-32px;left:20px}
+.cloud::after{width:46px;height:46px;top:-22px;left:68px}
+body.day .cloud{translate:0 0;opacity:.92}
+.c1{top:12%;--from:-120vw}.c2{top:26%;--from:120vw;scale:1.3}.c3{top:44%;--from:-120vw;scale:.8}.c4{top:62%;--from:120vw}.c5{top:80%;--from:-120vw;scale:1.2}
+@keyframes drift{to{transform:translateX(26px)}}
+</style>
+</head>
+<body>
+<div id="stars"></div><div id="day"></div><div class="moon"></div><div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div><div class="cloud c5"></div>
+<main id="m1">
+  <h1>کد کارت تولد رو وارد کن</h1>
+  <input id="code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="----">
+  <button id="go">تایید</button>
+  <div id="msg"></div>
+</main>
+<main id="m2">
+  <h1>این استیکر رو کپی کن، بدرد میخوره</h1>
+  <div class="frame" id="stk">🧨</div>
+  <button id="cp">کپی استیکر</button>
+  <p style="font-size:.8rem;opacity:.45;margin:18px 0 0">کیوآر کد بعدی رو اسکن کن💕</p>
+</main>
+<style>#lock{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(160deg,#1c0a38,#4d1452);color:#fff7ec;font-family:Vazirmatn,Tahoma,sans-serif;text-align:center;padding:24px}#lock h2{margin:0;font-size:1.5rem}#lock input{width:min(220px,70vw);font:inherit;font-size:2rem;letter-spacing:.3em;text-indent:.3em;text-align:center;direction:ltr;color:#fff7ec;background:rgba(255,255,255,.1);border:2px solid rgba(255,201,77,.6);border-radius:14px;padding:10px;outline:none}#lock button{margin:6px 0 0}#lock .shk{animation:lks .4s}@keyframes lks{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}#lkm{min-height:1.6em;color:#ff9ab8;font-weight:700}</style>
+<div id="lock"><h2>🔒 رمز رو وارد کن</h2><input id="lk" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><button id="lkb">ورود</button><div id="lkm"></div></div>
+<script>
+const $ = id => document.getElementById(id);
+const CODE = '8086';
+(function(){const st=$('stars');for(let i=0;i<70;i++){const e=document.createElement('div');e.className='star';const z=1+Math.random()*2.5;e.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;animation-delay:${Math.random()*2}s;animation-duration:${1.5+Math.random()*2}s`;st.appendChild(e)}})();
+$('code').addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,4)});
+$('code').addEventListener('keydown',e=>{if(e.key==='Enter')check()});
+$('go').onclick = check;
+function check(){
+  const v = $('code').value, m = $('msg'), box = $('code');
+  if (v === CODE){
+    m.className='ok'; m.textContent='آفرین، خوب کد یادت بوده 🎉';
+    box.blur(); confetti();
+    setTimeout(()=>{$('m1').style.display='none';$('m2').style.display='flex'},2200);
+  } else {
+    m.className='bad'; m.textContent='فسفر ماهی داری؟ 🐟';
+    box.classList.remove('shake'); void box.offsetWidth; box.classList.add('shake');
+  }
+}
+$('cp').onclick = async () => {
+  const t = '🧨', b = $('cp');
+  let ok = false;
+  try { await navigator.clipboard.writeText(t); ok = true; } catch(e) {}
+  if (!ok) { const a=document.createElement('textarea'); a.value=t; a.style.cssText='position:fixed;opacity:0'; document.body.appendChild(a); a.select(); try{ ok=document.execCommand('copy') }catch(e){} a.remove(); }
+  b.textContent = ok ? 'کپی شد ✓' : 'نیشد، استیکر رو نگه دار و کپی کن';
+  setTimeout(()=>b.textContent='کپی استیکر',2000);
+};
+function confetti(){
+  const cs=['#ff5d8f','#ffc94d','#4dd2ff','#7cf29a','#b784ff'];
+  for(let i=0;i<80;i++){const d=document.createElement('div');d.className='conf';d.style.left=Math.random()*100+'vw';d.style.background=cs[i%5];d.style.animationDuration=(2.5+Math.random()*3)+'s';d.style.animationDelay=Math.random()*1.2+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),7000)}
+}
+(function(){
+  document.querySelectorAll('.star').forEach(e=>{const l=parseFloat(e.style.left)<50;e.style.setProperty('--dx',(l?'-':'')+(70+Math.random()*60)+'vw');e.style.transitionDelay=(Math.random()*.6)+'s'});
+  const t=()=>document.body.classList.toggle('day');
+  document.querySelector('.moon').addEventListener('click',t);
+  document.querySelector('.sun').addEventListener('click',t);
+})();
+(function(){
+  const L=document.getElementById('lock'),i=document.getElementById('lk'),m=document.getElementById('lkm');
+  const ok=v=>v.split('').map(c=>c.charCodeAt(0)^7).join(',')==='50,54,55,52';
+  function go(){
+    if(ok(i.value)){L.remove();return}
+    m.textContent='رمز اشتباهه';
+    i.classList.remove('shk');void i.offsetWidth;i.classList.add('shk');i.value='';
+  }
+  i.addEventListener('input',()=>{i.value=i.value.replace(/\D/g,'').slice(0,4)});
+  i.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
+  document.getElementById('lkb').onclick=go;
+  setTimeout(()=>i.focus(),100);
+})();
+</script>
+</body>
+</html>
